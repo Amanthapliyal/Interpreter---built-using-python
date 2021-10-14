@@ -1,0 +1,35 @@
+Expressions : KEYWORD:VAR IDENTIFIER EQUAL expr
+              comp-expr((KEYWORD : AND | KEYWORD : OR )comp-expr)*
+             
+comp-expr   : NOT comp-expr
+              arith-expr ((EE | LT | GT | LTE | GTE) arith-expr)*
+
+arith-expr  : term((PLUS|MINUS)term)*
+
+Term        : factor((MUL|DIV)factor)*
+
+FACTOR      : (PLUS|MINUS) factor
+              power
+
+POWER       : atom ( pow factor)*
+
+ATOM        : INT|FLOAT|IDENTIFIER
+              LPAREN expr RPAREN
+              IF expr
+
+IF          : KEYWORD:IF expr KEYWORD: THEN expr
+              (KEYWORD: ELIF expr KEYWORD: THEN expr)*
+              (KEYWORD:ELSE  expr)?
+
+___________________________________________________________________________________________________________             
+
+IDENTIFIER - it's the variable name , variable name can be upper case,  lower case , digits and underscore.
+
+KEYWORD    - its function is as same as IDENTIFIER only diff is its defined already.
+
+EQUAL      - equal symbol will be the equal token.
+
+
+  VAR            Varibale_name        =        <expr>
+   ^                   ^              ^
+KEYWORD           IDENTIFIER        EQUALS
